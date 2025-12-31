@@ -1,68 +1,190 @@
+// Import CSS for Vite - this will be processed by Vite and injected automatically
+console.log('📦 INTRODUCE JS: Attempting to import CSS...');
+import '/css/styles.css';
+console.log('✅ INTRODUCE JS: CSS import statement executed');
+
+// Verify CSS loaded after a delay
+setTimeout(() => {
+  const stylesheets = Array.from(document.styleSheets);
+  const cssLoaded = stylesheets.some(sheet => {
+    try {
+      return sheet.href && (sheet.href.includes('styles.css') || sheet.href.includes('vite'));
+    } catch (e) {
+      return false;
+    }
+  });
+  console.log('📊 INTRODUCE JS: CSS verification:', {
+    stylesheetsCount: stylesheets.length,
+    cssFileFound: cssLoaded,
+    stylesheets: stylesheets.map(s => {
+      try {
+        return { href: s.href || 'inline', disabled: s.disabled };
+      } catch (e) {
+        return { href: 'cross-origin', disabled: s.disabled };
+      }
+    })
+  });
+}, 100);
+
 import { loadUser, saveUser } from '../storage.js';
 import { isValidLettersOnly } from '../validators.js';
 
-console.log('🔧 INTRODUCE PAGE: Initializing...');
+console.log('🔧 INTRODUCE PAGE: JavaScript module loaded');
+console.log('  Document ready state:', document.readyState);
+console.log('  Current URL:', window.location.href);
 
-const input = document.getElementById('name-input');
-const display = document.getElementById('name-display');
-const text = document.getElementById('name-text');
-const caret = document.getElementById('name-caret');
-const errorDiv = document.getElementById('error-message');
-const proceedBtn = document.getElementById('proceed-btn');
-
-console.log('📋 Element Check:');
-console.log('  input:', input ? '✅ Found' : '❌ NOT FOUND');
-console.log('  display:', display ? '✅ Found' : '❌ NOT FOUND');
-console.log('  text:', text ? '✅ Found' : '❌ NOT FOUND');
-console.log('  caret:', caret ? '✅ Found' : '❌ NOT FOUND');
-console.log('  errorDiv:', errorDiv ? '✅ Found' : '❌ NOT FOUND');
-console.log('  proceedBtn:', proceedBtn ? '✅ Found' : '❌ NOT FOUND (button was removed)');
-
-// Function to proceed to next page
-function proceedToNextPage() {
-  console.log('🚀 PROCEED TO NEXT PAGE called');
-  const name = input.value.trim();
-  console.log('  Input value:', input.value);
-  console.log('  Trimmed name:', name);
-  console.log('  Name length:', name.length);
+// Wait for DOM to be ready
+function initializePage() {
+  console.log('🔧 INTRODUCE PAGE: Initializing page elements...');
   
-  if (!name) {
-    console.log('  ⚠️ Name is empty');
-    errorDiv.textContent = 'Please enter your name.';
-    errorDiv.classList.remove('hidden');
-    return;
+  const input = document.getElementById('name-input');
+  const display = document.getElementById('name-display');
+  const text = document.getElementById('name-text');
+  const caret = document.getElementById('name-caret');
+  const errorDiv = document.getElementById('error-message');
+  const proceedBtn = document.getElementById('proceed-btn');
+  const inputPage = document.querySelector('.input-page');
+  const container = document.querySelector('.blinking-input-container');
+
+  console.log('📋 Element Check:');
+  console.log('  input:', input ? '✅ Found' : '❌ NOT FOUND');
+  console.log('  display:', display ? '✅ Found' : '❌ NOT FOUND');
+  console.log('  text:', text ? '✅ Found' : '❌ NOT FOUND');
+  console.log('  caret:', caret ? '✅ Found' : '❌ NOT FOUND');
+  console.log('  errorDiv:', errorDiv ? '✅ Found' : '❌ NOT FOUND');
+  console.log('  proceedBtn:', proceedBtn ? '✅ Found' : '❌ NOT FOUND (button was removed)');
+  console.log('  inputPage:', inputPage ? '✅ Found' : '❌ NOT FOUND');
+  console.log('  container:', container ? '✅ Found' : '❌ NOT FOUND');
+  
+  // Check computed styles
+  if (inputPage) {
+    const styles = window.getComputedStyle(inputPage);
+    console.log('\n📊 .input-page Computed Styles:');
+    console.log('  display:', styles.display);
+    console.log('  visibility:', styles.visibility);
+    console.log('  opacity:', styles.opacity);
+    console.log('  minHeight:', styles.minHeight);
+    console.log('  paddingTop:', styles.paddingTop);
+    console.log('  position:', styles.position);
   }
   
-  if (!isValidLettersOnly(name)) {
-    console.log('  ⚠️ Name validation failed');
-    errorDiv.textContent = 'Enter a valid name (letters only).';
-    errorDiv.classList.remove('hidden');
-    return;
+  if (container) {
+    const styles = window.getComputedStyle(container);
+    console.log('\n📊 .blinking-input-container Computed Styles:');
+    console.log('  display:', styles.display);
+    console.log('  visibility:', styles.visibility);
+    console.log('  opacity:', styles.opacity);
+    console.log('  flexDirection:', styles.flexDirection);
+    console.log('  alignItems:', styles.alignItems);
   }
-
-  console.log('  ✅ Name is valid, proceeding...');
-  errorDiv.classList.add('hidden');
-  const prev = loadUser();
-  console.log('  Previous user data:', prev);
-  saveUser({ name: name, location: prev?.location ?? '' });
-  console.log('  Saved user data, navigating to city.html');
-  window.location.href = 'city.html';
+  
+  if (display) {
+    const styles = window.getComputedStyle(display);
+    console.log('\n📊 .blinking-input-display Computed Styles:');
+    console.log('  display:', styles.display);
+    console.log('  visibility:', styles.visibility);
+    console.log('  opacity:', styles.opacity);
+    console.log('  fontSize:', styles.fontSize);
+    console.log('  color:', styles.color);
+  }
+  
+  // Check if CSS rules are applied
+  console.log('\n📜 CSS Rules Check:');
+  const allStylesheets = Array.from(document.styleSheets);
+  let foundInputPageRule = false;
+  let foundContainerRule = false;
+  
+  allStylesheets.forEach((sheet, index) => {
+    try {
+      if (sheet.cssRules) {
+        Array.from(sheet.cssRules).forEach(rule => {
+          if (rule.selectorText) {
+            if (rule.selectorText.includes('.input-page')) {
+              foundInputPageRule = true;
+              console.log(`  ✅ Found .input-page rule in stylesheet ${index + 1}`);
+            }
+            if (rule.selectorText.includes('.blinking-input-container')) {
+              foundContainerRule = true;
+              console.log(`  ✅ Found .blinking-input-container rule in stylesheet ${index + 1}`);
+            }
+          }
+        });
+      }
+    } catch (e) {
+      // Cross-origin stylesheet
+    }
+  });
+  
+  if (!foundInputPageRule) {
+    console.log('  ⚠️ .input-page CSS rule not found in any stylesheet');
+  }
+  if (!foundContainerRule) {
+    console.log('  ⚠️ .blinking-input-container CSS rule not found in any stylesheet');
+  }
+  
+  return { input, display, text, caret, errorDiv, proceedBtn };
 }
 
-// Load saved name
-const user = loadUser();
-console.log('👤 Loaded user:', user);
-if (user?.name) {
-  console.log('  Setting saved name:', user.name);
-  input.value = user.name;
-  text.textContent = user.name;
-  display.classList.add('has-value');
-  caret.classList.add('hidden');
+// Initialize when DOM is ready
+let pageElements;
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    pageElements = initializePage();
+    setupPageFunctionality(pageElements);
+  });
 } else {
-  console.log('  No saved name found');
+  pageElements = initializePage();
+  setupPageFunctionality(pageElements);
 }
 
-input.addEventListener('input', (e) => {
+function setupPageFunctionality({ input, display, text, caret, errorDiv, proceedBtn }) {
+  console.log('🔧 INTRODUCE PAGE: Setting up page functionality...');
+
+  // Function to proceed to next page
+  function proceedToNextPage() {
+    console.log('🚀 PROCEED TO NEXT PAGE called');
+    const name = input.value.trim();
+    console.log('  Input value:', input.value);
+    console.log('  Trimmed name:', name);
+    console.log('  Name length:', name.length);
+    
+    if (!name) {
+      console.log('  ⚠️ Name is empty');
+      errorDiv.textContent = 'Please enter your name.';
+      errorDiv.classList.remove('hidden');
+      return;
+    }
+    
+    if (!isValidLettersOnly(name)) {
+      console.log('  ⚠️ Name validation failed');
+      errorDiv.textContent = 'Enter a valid name (letters only).';
+      errorDiv.classList.remove('hidden');
+      return;
+    }
+
+    console.log('  ✅ Name is valid, proceeding...');
+    errorDiv.classList.add('hidden');
+    const prev = loadUser();
+    console.log('  Previous user data:', prev);
+    saveUser({ name: name, location: prev?.location ?? '' });
+    console.log('  Saved user data, navigating to city.html');
+    window.location.href = 'city.html';
+  }
+
+  // Load saved name
+  const user = loadUser();
+  console.log('👤 Loaded user:', user);
+  if (user?.name) {
+    console.log('  Setting saved name:', user.name);
+    input.value = user.name;
+    text.textContent = user.name;
+    display.classList.add('has-value');
+    caret.classList.add('hidden');
+  } else {
+    console.log('  No saved name found');
+  }
+
+  input.addEventListener('input', (e) => {
   const value = e.target.value;
   console.log('⌨️ INPUT EVENT:', {
     value: value,
@@ -454,4 +576,4 @@ console.log('  - Use Backspace/Delete to clear text');
 console.log('  - Check console for detailed event logs');
 console.log('  - Try typing to see if input events are captured');
 console.log('  - Try pressing Enter to see if keydown events are captured');
-
+}

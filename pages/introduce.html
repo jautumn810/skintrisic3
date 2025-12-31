@@ -4,7 +4,129 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Introduce Yourself - Skinstric</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css" id="main-stylesheet">
+  <script>
+    // DEBUG: Check CSS loading
+    console.log('🔍 INTRODUCE PAGE DEBUG - CSS Loading Check');
+    console.log('===========================================');
+    
+    function checkCSSLoading() {
+      const linkTag = document.getElementById('main-stylesheet');
+      const stylesheets = Array.from(document.styleSheets);
+      
+      console.log('\n📍 CSS Link Tag:');
+      console.log('  Link tag exists:', linkTag ? '✅ YES' : '❌ NO');
+      if (linkTag) {
+        console.log('  Link href:', linkTag.href);
+        console.log('  Link rel:', linkTag.rel);
+        console.log('  Link disabled:', linkTag.disabled);
+      }
+      
+      console.log('\n📍 Stylesheets Found:', stylesheets.length);
+      stylesheets.forEach((sheet, index) => {
+        try {
+          console.log(`  Stylesheet ${index + 1}:`, {
+            href: sheet.href || 'inline',
+            disabled: sheet.disabled,
+            rules: sheet.cssRules ? sheet.cssRules.length : 'N/A'
+          });
+        } catch (e) {
+          console.log(`  Stylesheet ${index + 1}:`, 'Cross-origin or error');
+        }
+      });
+      
+      // Check if CSS file loaded
+      const cssLoaded = stylesheets.some(sheet => {
+        try {
+          return sheet.href && sheet.href.includes('styles.css');
+        } catch (e) {
+          return false;
+        }
+      });
+      console.log('\n📍 CSS File Loaded:', cssLoaded ? '✅ YES' : '❌ NO');
+      
+      // Check element visibility
+      setTimeout(() => {
+        const inputPage = document.querySelector('.input-page');
+        const container = document.querySelector('.blinking-input-container');
+        const display = document.querySelector('.blinking-input-display');
+        
+        console.log('\n📍 Element Visibility Check:');
+        if (inputPage) {
+          const styles = window.getComputedStyle(inputPage);
+          console.log('  .input-page:', {
+            display: styles.display,
+            visibility: styles.visibility,
+            opacity: styles.opacity,
+            minHeight: styles.minHeight,
+            paddingTop: styles.paddingTop
+          });
+        } else {
+          console.log('  .input-page: ❌ NOT FOUND');
+        }
+        
+        if (container) {
+          const styles = window.getComputedStyle(container);
+          console.log('  .blinking-input-container:', {
+            display: styles.display,
+            visibility: styles.visibility,
+            opacity: styles.opacity
+          });
+        } else {
+          console.log('  .blinking-input-container: ❌ NOT FOUND');
+        }
+        
+        if (display) {
+          const styles = window.getComputedStyle(display);
+          console.log('  .blinking-input-display:', {
+            display: styles.display,
+            visibility: styles.visibility,
+            opacity: styles.opacity,
+            fontSize: styles.fontSize,
+            color: styles.color
+          });
+        } else {
+          console.log('  .blinking-input-display: ❌ NOT FOUND');
+        }
+      }, 100);
+    }
+    
+    // Run immediately
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', checkCSSLoading);
+    } else {
+      checkCSSLoading();
+    }
+    
+    // Also check after a delay
+    setTimeout(checkCSSLoading, 500);
+    window.addEventListener('load', checkCSSLoading);
+  </script>
+  <style>
+    /* Ensure body and main content are visible */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      min-height: 100vh;
+    }
+    .input-page {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      min-height: 100vh !important;
+    }
+    .blinking-input-container {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    .blinking-input-display {
+      display: inline-block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
