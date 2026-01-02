@@ -3,6 +3,5 @@ node_modules
 .next
 .vscode
 src
-lib
 vite.config.js
 *.log
