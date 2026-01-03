@@ -48,9 +48,302 @@ html, body {
   font-weight: 800;
   letter-spacing: 0.04em;
   font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.enter-code:hover {
+  opacity: 0.9;
 }
 
-/* Diamonds */
+/* Home Page */
+.home-container {
+  padding-top: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 110px);
+  position: relative;
+}
+
+.diamond-outline {
+  width: 500px;
+  height: 500px;
+  border: 3px solid rgba(0,0,0,0.9);
+  transform: rotate(45deg);
+  position: absolute;
+}
+
+.main-title {
+  font-size: clamp(56px, 10vw, 90px);
+  font-weight: 300;
+  line-height: 0.95;
+  text-align: center;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  font-size: 22px;
+  line-height: 1.5;
+  color: rgba(0,0,0,0.45);
+  text-align: center;
+  max-width: 600px;
+}
+
+.diamond-button {
+  width: 150px;
+  height: 150px;
+  border: 3px solid rgba(0,0,0,0.9);
+  transform: rotate(45deg);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
+  position: relative;
+  background: #fff;
+}
+.diamond-button:hover {
+  transform: rotate(45deg) scale(1.05);
+  opacity: 0.9;
+}
+.diamond-button.black {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+.diamond-button-label {
+  transform: rotate(-45deg);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Input Pages */
+.input-page {
+  padding-top: 140px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.input-label {
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid rgba(0,0,0,0.9);
+}
+
+/* Demographics Page */
+.demographics-container {
+  padding-top: 140px;
+  max-width: 860px;
+  margin: 0 auto;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.demographics-title {
+  font-size: clamp(44px, 8vw, 86px);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+}
+
+.demographics-subtitle {
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  color: rgba(0,0,0,0.75);
+  margin-bottom: 40px;
+}
+
+.demographic-card {
+  background: #efefef;
+  border: 2px solid rgba(0,0,0,0.55);
+  padding: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.demographic-card.selected {
+  background: #131313;
+  color: #fff;
+  border-color: #131313;
+}
+
+.arc-meter {
+  width: 720px;
+  height: 360px;
+  position: relative;
+  margin: 40px auto;
+}
+
+.arc-meter svg {
+  width: 100%;
+  height: 100%;
+}
+
+.arc-path {
+  fill: none;
+  stroke-width: 18;
+  stroke-linecap: round;
+}
+
+.table-row {
+  background: #efefef;
+  border: 2px solid rgba(0,0,0,0.55);
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.table-row.selected {
+  background: #131313;
+  color: #fff;
+  border-color: #131313;
+}
+
+.radio-button {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0,0,0,0.9);
+  transform: rotate(45deg);
+  position: relative;
+  flex-shrink: 0;
+}
+.radio-button.selected::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+}
+
+/* Permissions/AI Analysis Pages */
+.preview-box {
+  width: 220px;
+  height: 270px;
+  border: 3px solid rgba(0,0,0,0.18);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 40px;
+  background: #fff;
+}
+
+.ai-icon {
+  width: 180px;
+  height: 180px;
+}
+
+.rotating-square {
+  position: absolute;
+  border: 2px dotted rgba(0,0,0,0.3);
+  animation: slow-spin 34s linear infinite;
+}
+.rotating-square:nth-child(2) {
+  animation-duration: 44s;
+}
+.rotating-square:nth-child(3) {
+  animation-duration: 56s;
+}
+
+@keyframes slow-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Back Button */
+.back-button {
+  position: fixed;
+  left: 26px;
+  bottom: 62px;
+  width: 58px;
+  height: 58px;
+  border: 3px solid rgba(0,0,0,0.9);
+  transform: rotate(45deg);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  background: #fff;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.back-button:hover {
+  transform: rotate(45deg) scale(1.1);
+  opacity: 0.9;
+}
+.back-button-arrow {
+  transform: rotate(-45deg);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* Forward Button */
+.forward-button {
+  position: fixed;
+  right: 26px;
+  bottom: 62px;
+  width: 58px;
+  height: 58px;
+  border: 3px solid rgba(0,0,0,0.9);
+  transform: rotate(45deg);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  background: #111;
+  color: #fff;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.forward-button:hover {
+  transform: rotate(45deg) scale(1.1);
+  opacity: 0.9;
+}
+.forward-button-arrow {
+  transform: rotate(-45deg);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* Blinking Input */
+.blinking-input {
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  font-size: 24px;
+  border: none;
+  border-bottom: 3px solid rgba(0,0,0,0.9);
+  padding: 10px 0;
+  background: transparent;
+  width: 100%;
+  outline: none;
+}
+.blinking-input::after {
+  content: '|';
+  animation: blink 1.05s steps(1) infinite;
+}
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Diamond Button */
 .diamond-btn {
   width: 150px;
   height: 150px;
@@ -59,6 +352,8 @@ html, body {
   place-items: center;
   background: white;
   border: 3px solid rgba(0,0,0,0.9);
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
 }
 .diamond-btn span {
   transform: rotate(-45deg);
@@ -85,10 +380,6 @@ html, body {
 }
 
 /* Center caret */
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
 .center-caret {
   position: absolute;
   left: 50%;
@@ -100,94 +391,7 @@ html, body {
   pointer-events: none;
 }
 
-/* Home */
-.home-wrap {
-  padding-top: 140px;
-  min-height: 100vh;
-  position: relative;
-}
-.home-side {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 20;
-}
-.home-side.left { left: 24px; }
-.home-side.right { right: 24px; }
-.home-center {
-  max-width: 920px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 140px 24px 0;
-}
-.home-title {
-  font-size: clamp(56px, 10vw, 90px);
-  font-weight: 300;
-  line-height: 0.95;
-  margin: 0;
-}
-.home-sub {
-  color: rgba(0,0,0,0.45);
-  font-size: 22px;
-  line-height: 1.5;
-  margin-top: 22px;
-}
-
-/* Responsive utilities */
-.lg-hidden {
-  display: block;
-}
-.lg-block {
-  display: none;
-}
-@media (min-width: 1024px) {
-  .lg-hidden {
-    display: none;
-  }
-  .lg-block {
-    display: block;
-  }
-}
-
-/* Home page responsive adjustments */
-.max-sm-scale {
-  transform: scale(0.75);
-  transform-origin: center;
-  padding: 24px;
-}
-@media (min-width: 640px) {
-  .max-sm-scale {
-    transform: scale(1);
-    padding: 0;
-  }
-}
-
-.md-fixed-center {
-  position: relative;
-}
-@media (min-width: 768px) {
-  .md-fixed-center {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-.home-heading-responsive {
-  font-size: 60px;
-}
-@media (min-width: 1024px) {
-  .home-heading-responsive {
-    font-size: 100px;
-  }
-}
-
 /* Input pages */
-.input-page {
-  padding-top: 140px;
-  min-height: 100vh;
-}
 .input-top {
   max-width: 980px;
   margin: 0 auto;
@@ -203,6 +407,12 @@ html, body {
 .back-fixed {
   position: fixed;
   left: 26px;
+  bottom: 62px;
+  z-index: 50;
+}
+.right-fixed {
+  position: fixed;
+  right: 26px;
   bottom: 62px;
   z-index: 50;
 }
@@ -249,10 +459,6 @@ html, body {
   align-items: center;
   position: relative;
   z-index: 2;
-}
-.ai-icon {
-  width: 180px;
-  height: 180px;
 }
 .ai-label-top {
   margin-top: 22px;
@@ -366,12 +572,7 @@ html, body {
   z-index: 50;
 }
 
-.right-fixed{position:fixed;right:26px;bottom:62px;z-index:50;}
-
 /* Spin animations for diamond images */
-@keyframes spin {
-  to { transform: rotate(1turn); }
-}
 .animate-spin-slow {
   animation: spin 50s linear infinite;
 }
@@ -381,6 +582,9 @@ html, body {
 .animate-spin-slowest {
   animation: spin 85s linear infinite;
 }
+@keyframes spin {
+  to { transform: rotate(1turn); }
+}
 
 /* Rotation utilities */
 .rotate-185 { transform: rotate(185deg); }
@@ -389,14 +593,27 @@ html, body {
 .rotate-200 { transform: rotate(200deg); }
 .rotate-205 { transform: rotate(205deg); }
 
-/* Hover scale for icons */
-.hover\:scale-108:hover {
-  transform: scale(1.08);
-}
-.duration-700 {
-  transition-duration: 0.7s;
-}
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+/* Responsive */
+@media (max-width: 768px) {
+  .diamond-outline {
+    width: 350px;
+    height: 350px;
+  }
+  
+  .diamond-button {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .arc-meter {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .demographics-container,
+  .input-page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 

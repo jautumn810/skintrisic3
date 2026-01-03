@@ -4,7 +4,6 @@
 Replicate the website at https://skinstric-wandag.vercel.app/ EXACTLY as it appears. Do not deviate from the original design, layout, styling, fonts, spacing, colors, or any visual elements.
 
 ## TECH STACK
-- React.js (18.3.1+)
 - Next.js (15.0.0+)
 - TypeScript (5.5.4+)
 - All dependencies are already installed

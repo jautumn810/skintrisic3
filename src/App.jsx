@@ -7,12 +7,9 @@ import ImagePage from './pages/analysis/ImagePage'
 import SelfiePage from './pages/analysis/SelfiePage'
 import DemographicsPage from './pages/analysis/DemographicsPage'
 import CityPage from './pages/analysis/CityPage'
-import SelectPage from './pages/SelectPage'
-import ProcessingPage from './pages/ProcessingPage'
-import ResultPage from './pages/ResultPage'
 import SummaryPage from './pages/SummaryPage'
-import ThankYouPage from './pages/ThankYouPage'
-import CitySelectPage from './pages/CityPage'
+import './globals.css'
+
 
 function App() {
   return (
@@ -26,16 +23,10 @@ function App() {
         <Route path="/analysis/selfie" element={<SelfiePage />} />
         <Route path="/analysis/demographics" element={<DemographicsPage />} />
         <Route path="/analysis/city" element={<CityPage />} />
-        <Route path="/select" element={<SelectPage />} />
-        <Route path="/processing" element={<ProcessingPage />} />
-        <Route path="/result" element={<ResultPage />} />
         <Route path="/summary" element={<SummaryPage />} />
-        <Route path="/thank-you" element={<ThankYouPage />} />
-        <Route path="/city" element={<CitySelectPage />} />
       </Routes>
     </Router>
   )
 }
 
 export default App
-
